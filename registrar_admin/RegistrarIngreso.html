@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>BOUTIQUE D'KAR</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+    <script src="https://kit.fontawesome.com/31127b7562.js" crossorigin="anonymous"></script>
+    <!--Bootstrap-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <h3>BOUTIQUE D'KAR</h3>
+            <p>Lo mejor de moda para <span>ellos!</span></p>
+        </div>
+        <div class="contenedor">
+            <input type="checkbox" id="menuprincipal">
+            <label class="fas fa-bars" for="menuprincipal"></label>
+            <nav class="menu">
+                <a href="../inicio_admin/"><i class="fal fa-home-lg" ></i>INICIO</a></li>
+                <a href="RegistrarIngreso.html">INGRESO DE PRENDAS</a></li>
+                <a href="../salida_admin/SalidaProducto.html">SALIDA DE PRENDAS</a></li>
+                <a href="../consultar_admin/">
+                    <img src="../consultar_admin/img/consultar_prenda.png" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="Ver prendas" style="height:38px;width:35px;padding-bottom:2px;"> VER PRENDAS</a>
+                </li>
+                <a href="#">CODIGOS DE PRENDAS</a></li>
+                <a href="../cerrar_sesion/cerrar_sesion.php">CERRAR SESIÓN</a></li>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="registroProductos">
+            <div>
+                <h1>Ingreso de Prendas</h1>
+            </div>
+            <!--AQUI COMIENZA EL FORM-->
+            <form action="registro_perroDB.php" method="GET">
+                <!--CATEGORIA INPUT-->
+                <label for="categoria">Seleccione Categoría</label>
+                <Select name="Categoria" id="Categoria" onchange="cargar_subcategorias()">
+					<Option value = ""> Seleccione categoria ...		
+				<p></Select>
+                </p>
+                <!--SUBCATEGORIA INPUT-->
+                <label for="subcategoria">Seleccione Subcategoría</label>
+                <Select name="Subcategoria" id="Subcategoria">
+					<Option value = ""> Seleccione subcategoria ...		
+				<p></Select>
+                </p>
+                <script src="js/Opciones.js"></script>
+                <!--TALLA INPUT-->
+                <label for="talla">Seleccione Talla</label>
+                <Select name="Talla">
+					<Option value = "S"> Small
+					<Option value = "M"> Medium
+					<Option value = "L"> Large
+					<Option value = "XL"> Extra Large
+					<Option value = "XXL"> Extra Extra Large
+				<p></Select>
+                </p>
+                <!--COLOR INPUT-->
+                <label for="color">Seleccione Color</label>
+                <Select name="Color">
+                    <Option value = "Mixto"> Mixto
+                    <Option value = "Otros"> Otro
+                    <Option value = "Blanco"> Blanco
+                    <Option value = "Plomo"> Plomo
+                    <Option value = "Negro"> Negro
+                    <Option value = "Azul"> Azul
+                    <Option value = "Celeste"> Celeste
+                    <Option value = "Rojo"> Rojo
+                    <Option value = "Naranja">Naranja
+                    <Option value = "Rosado"> Rosado
+                    <Option value = "Amarillo"> Amarillo
+                    <Option value = "Marron"> Marrón
+                    <Option value = "Verde"> Verde
+                    <Option value = "Morado"> Morado
+				<p></Select>
+                </p>
+                <!--CANTIDAD INPUT-->
+                <label for="cantidad">Cantidad a ingresar</label>
+                <input name="Cantidad" type="number" placeholder="Cantidad a ingresar">
+                <!--FOTOS INPUT-->
+                <label for="fotos">Ingrese fotos de referencia</label>
+                <input name="FotoA" type="file">
+                <input name="FotoB" type="file">
+                <input name="FotoC" type="file">
+                <!--ENVIAR-->
+                <div class="boton">
+                    <Input name="Registrar" type="submit" value="REGISTRAR INGRESO">
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="pie">
+            <a href="#"><i class="fab fa-facebook-square fa-2x"></i></a>
+            <a href="#"><i class="fab fa-instagram fa-2x"></i></a>
+            <a href="#"><i class="fas fa-map-marked-alt fa-2x"></i></a>
+            <p>Copyright © 2021, Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

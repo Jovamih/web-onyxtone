@@ -1,0 +1,113 @@
+/*.body {
+    background-image: url(../img/montes_nocturno_desenfocado.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}*/
+
+.logo {
+    width: 85%;
+    margin-left: 7.5%;
+    font-family: 'Oswald', sans-serif;
+}
+
+.logo h2 {
+    font-size: 50px;
+    line-height: 68px;
+    color: #000;
+    font-weight: 700;
+}
+
+.pie {
+    width: 100%;
+    height: 6vh;
+    background: #000;
+    float: right;
+    padding-left: 1vw;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+i {
+    padding-top: 5px;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.pie p {
+    float: right;
+    color: #fff;
+    font-style: italic;
+    padding-top: 1vh;
+    margin-right: 5px;
+    font-size: 15px;
+}
+
+
+/*********responsive*******/
+
+@media (max-width: 980px) {
+    .logo {
+        width: 100vw;
+        margin: 0px;
+        text-align: left;
+    }
+    .logo h3 {
+        font-size: 35px;
+        line-height: 58px;
+        color: #000;
+        font-weight: 700;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        padding-left: 20%;
+    }
+    p,
+    span {
+        text-align: center;
+        font-size: 18px;
+        padding-top: 0px;
+        margin-top: 0px;
+    }
+    .contenedor .menu a {
+        font-size: 17px;
+    }
+    .formato-carrusel {
+        padding-top: 0px;
+    }
+    .descripcion {
+        width: 95%;
+        margin-left: 2.5%;
+    }
+    .descripcion p {
+        text-align: center;
+        font-size: 15px;
+    }
+    .ruta {
+        width: 100%;
+        height: 30%;
+        margin-left: 0px;
+    }
+    .pie {
+        width: 100%;
+        height: 10vh;
+        background: #000;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+    .pie p {
+        float: none;
+        font-size: 14px;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+span {
+    background: #000;
+    color: #fff;
+    border-radius: 5px;
+    padding-left: 5PX;
+    padding-right: 5PX;
+}
