@@ -1,4 +1,4 @@
-# Pagina web de la Boutique D'KAR
+# Pagina web de la Boutique ONYX STONE
 
 ### Realizar tus primeros pasos
 * Para clonar este repositorio en tu maquina local usa **git clone**
