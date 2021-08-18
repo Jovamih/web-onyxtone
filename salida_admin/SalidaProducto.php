@@ -68,7 +68,7 @@
     <main class="justify-content-center formato-fuente-boostrap">
     <section class="salidaProductos">
             <div class="logo"> 
-                <h3><a href="https://boutiquedkarportal.herokuapp.com/" target="_blank">BOUTIQUE D'KAR</a></h3>
+                <h3><a href="https://onyxstoneportal.herokuapp.com/ " target="_blank">BOUTIQUE D'KAR</a></h3>
                 <p>Lo mejor de moda para <span>ellos!</span></p>
             </div>
             <div>

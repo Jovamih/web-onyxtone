@@ -54,7 +54,7 @@
   
 </nav>
 <div class="logo">
-            <h2 >BOUTIQUE D'KAR</h2>
+            <h2 >BOUTIQUE ONYX STONE</h2>
 			<p>Lo mejor de moda para <span>ellos!</span></p>
 </div>
 
@@ -87,7 +87,7 @@
                 </div>
                 <div class="form-group col-6">
             
-            <label for="password" style="color:white"><a href="mailto:boutique.dkar@hotmail.com">No recuerdas tu contraseña? Click Aqui</a></label>
+            <label for="password" style="color:white"><a href="mailto:boutique.onyxstone@hotmail.com">No recuerdas tu contraseña? Click Aqui</a></label>
         </div>
             </div>
 

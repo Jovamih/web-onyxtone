@@ -65,7 +65,7 @@
             </nav>
         </div>
         <div class="logo" style="margin-top:4%;">
-            <h3>BOUTIQUE D'KAR</h3>
+            <h3>BOUTIQUE ONYX STONE</h3>
             <p>Lo mejor de moda para <span>ellos!</span></p>
         </div>
        

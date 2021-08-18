@@ -28,7 +28,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BOUTIQUE D'KAR</title>
+    <title>BOUTIQUE ONYX STONE</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="../resources/faviconv2.png"/>    
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
@@ -67,7 +67,7 @@
     <main>
         <section class="registroProductos">
             <div class="logo">
-            <h3><a href="https://boutiquedkarportal.herokuapp.com/" target="_blank">BOUTIQUE D'KAR</a></h3>
+            <h3><a href="https://onyxstoneportal.herokuapp.com/ " target="_blank">BOUTIQUE ONYX STONE</a></h3>
                 <p>Lo mejor de moda para <span>ellos!</span></p>
             </div>
             <div>
