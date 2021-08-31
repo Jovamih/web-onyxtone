@@ -4,7 +4,7 @@
 * Para clonar este repositorio en tu maquina local usa **git clone**
  
 ```
-git clone https://github.com/Jovamih/web-onyxtone.git <nombre_carpeta>
+git clone https://github.com/Jovamih/web-dkar.git <nombre_carpeta>
 ```
 
  ***<nombre_carpeta>** es el nombre de la carpeta donde guardaras el repositorio clonado en tu computadora.*
@@ -43,9 +43,9 @@ Existen **dos maneras diferentes** para que nuestro proyecto tenga los cambios d
 
 a)Ingresa el comando **git remote add** para enlazar tu proyecto local con el respositorio remoto de tu equipo
 ```
-git remote add upstream https://github.com/Jovamih/web-onyxtone.git
+git remote add upstream https://github.com/Jovamih/web-dkar.git
 ```
-* **https://github.com/Jovamih/web-onyxtone.git** : Es la URL del proyecto padre, es de suponer que todos los integrantes del equipo haran sus pull requests en ese repositorio para unir sus codigos, por ello necesitas agregar la URL de ese proyecto principal, porque de esa manera obtendras los cambios que han aportando los demas integrantes.
+* **https://github.com/Jovamih/web-dkar.git** : Es la URL del proyecto padre, es de suponer que todos los integrantes del equipo haran sus pull requests en ese repositorio para unir sus codigos, por ello necesitas agregar la URL de ese proyecto principal, porque de esa manera obtendras los cambios que han aportando los demas integrantes.
 
 * Esta configuracion solo se agrega una vez
 

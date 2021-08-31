@@ -5,6 +5,7 @@
         session_destroy();
         header("Location:../login_admin/");
     }else{
-        die("NO PUEDE ACCEDER A ESTE SITIO.VERIFIQUE SU CONEXION A INTERNET O SI TIENE PRIVILEGIOS DE ACCESO");
+        header("Location:../login_admin/");
+        //die("NO PUEDE ACCEDER A ESTE SITIO.VERIFIQUE SU CONEXION A INTERNET O SI TIENE PRIVILEGIOS DE ACCESO");
     }
 ?>

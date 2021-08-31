@@ -36,6 +36,10 @@
 
 <head>
     <title>Login Boutique</title>
+    <!--Developers 
+        @Castillo Cornejo, Jeffrey Bryan		
+        @Collantes Tito, Miguel Angel 		
+        @Mitma Huaccha, Johan Valerio  	-->
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -87,7 +91,7 @@
                 </div>
                 <div class="form-group col-6">
             
-            <label for="password" style="color:white"><a href="mailto:boutique.onyxstone@hotmail.com">No recuerdas tu contraseña? Click Aqui</a></label>
+            <label for="password" style="color:white"><a href="mailto:boutique.onyx@hotmail.com">No recuerdas tu contraseña? Click Aqui</a></label>
         </div>
             </div>
 

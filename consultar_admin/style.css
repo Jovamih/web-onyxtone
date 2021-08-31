@@ -4,6 +4,11 @@
     margin: 0px;
 }
 
+body {
+    background-image: url(img/fondo_ropa_resize.jpg);
+    background-repeat: repeat;
+}
+
 
 /****************************************************************************************************/
 
@@ -109,6 +114,10 @@ header .contenedor label {
     line-height: 68px;
     color: #000;
     font-weight: 700;
+}
+
+.logo p {
+    color: #fff;
 }
 
 span {
@@ -263,4 +272,9 @@ i {
     header .contenedor label {
         display: none;
     }
+}
+
+.my-table {
+    background: rgba(255, 255, 255, 0.52);
+    /* backdrop-filter: blur(8px);*/
 }

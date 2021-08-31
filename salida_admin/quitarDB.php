@@ -13,18 +13,11 @@
 	
     $c_sub = substr($v1, 0, 3); //Las 3 primeras letras del código
     $c_tal = substr($v1,3, -3);
-    $c_col = substr($v1, -3);
-    
-    $consulta = "select unidadesDisp FROM Producto where idSubcategoria = '102' AND idColor = 5 AND idTalla = 'L'";
-    $resultado=mysqli_query($conn,$consulta);
-	$array=mysqli_fetch_array($resultado);
-
+    $c_col = substr($v1, -3);    
 
 	//conuslta SQL
 	$consulta="SELECT COUNT(*) as contar FROM Producto where idSubcategoria='$c_sub' AND idTalla='$c_tal' AND idColor='$c_col'";
-
 	$resultado=mysqli_query($conn,$consulta);
-
 	$array=mysqli_fetch_array($resultado);
 
 	//si registra campos vacios
@@ -45,7 +38,10 @@
             $diferencia = $actual - $v2;
             $sql = "UPDATE Producto SET unidadesDisp = $diferencia where idSubcategoria='$c_sub' AND idTalla='$c_tal' AND idColor='$c_col'";
 			if (mysqli_query($conn, $sql)) {
-				//SI SE PUDO
+				echo 	"<script>
+	                alert('Registro exitoso');
+	                window.location= 'SalidaProducto.php'
+	   			 </script>";
 			} else {
 				echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 			}
@@ -55,7 +51,6 @@
 	                window.location= 'SalidaProducto.php'
 	   			 </script>";
 		}
-	}
-	/****/
+	}	
 	mysqli_close($conn);	
 ?>

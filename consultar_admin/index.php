@@ -2,7 +2,8 @@
         session_start();
         //include_once("../database/conexion.php");
         if(!isset($_SESSION['user'])){
-          die("Error de conexion. Talvez se deba a su conexion a internet o al acceder a un sitio con privilegios insuficientes");
+          //die("Error de conexion. Talvez se deba a su conexion a internet o al acceder a un sitio con privilegios insuficientes");
+          header("Location:../login_admin/");
         }else{
           //en caso de que si este definida obtenemos algun valor
         }
@@ -52,9 +53,13 @@
             <input type="checkbox" id="menuprincipal">
             <label class="fas fa-bars" for="menuprincipal"></label>
             <nav class="menu">
-                <a href="../inicio_admin/"><i class="fal fa-home-lg" ></i>INICIO</a></li>
-                <a href="../registrar_admin/RegistrarIngreso.php">INGRESO DE PRENDAS</a></li>
-                <a href="../salida_admin/SalidaProducto.php">SALIDA DE PRENDAS</a></li>
+                <a href="../inicio_admin/">
+                <i class="fal fa-home-lg" ></i>INICIO
+                </a></li>
+                <a href="../registrar_admin/RegistrarIngreso.php">
+                <i class="fas fa-plus"></i>INGRESO DE PRENDAS
+              </a></li>
+                <a href="../salida_admin/SalidaProducto.php"><i class="fas fa-minus"></i>SALIDA DE PRENDAS</a></li>
                 <a href="../consultar_admin/"><i class="fal fa-eye"></i>
                   
                  VER PRENDAS</a></li>
@@ -72,20 +77,20 @@
     </header>
 		
   <main class="justify-content-center formato-fuente-boostrap">
-  <h2 style="text-align: center;"><i class="fas fa-book-reader" style="color:black;"></i>Consultar catalogo de productos</h2>
+  <h2 style="text-align: center;color:white;"><i class="fas fa-book-reader" style="color:white;"></i>Consultar catalogo de productos</h2>
     <!-- FORMULARIO DE CONSULTA-->
     <div class="container justify-content-center">
             <form action="./" method="POST">
 
                 <div class="row justify-content-center align-items-center">
-                        <label for="" class="form-label" style="margin-right:1%;">Filtrar por </label>
+                        <label for="" class="form-label" style="margin-right:1%;color:white;">Filtrar por </label>
                         <div class="custom-control custom-radio custom-control-inline">
                               <input type="radio" id="check_name" name="checkname" class="custom-control-input" onchange="javascript:showInputName();" checked>
-                              <label class="custom-control-label" for="check_name">Nombre producto</label>
+                              <label class="custom-control-label" for="check_name"  style="color:white;">Nombre producto</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                               <input type="radio" id="check_category" name="checkcategory" class="custom-control-input" onchange="javascript:showInputCategory();">
-                              <label class="custom-control-label" for="check_category">Categoria</label>
+                              <label class="custom-control-label" for="check_category"  style="color:white;">Categoria</label>
                         </div>
                 </div>   
                 <div class="row justify-content-center align-items-center" id="input-nombre" style="display:block;">
@@ -94,7 +99,7 @@
                         <div class="ui-widget">
                             <label for="nombre"></label>
                             <input  class="form-control row" name="nombre" id="nombre" value="" style="margin-left:40%; width:20%;">
-                            <small id="helpId" class="text-muted">Ingrese el nombre de la prenda a buscar</small>
+                            <small id="helpId" class="text"  style="color:white;">Ingrese el nombre de la prenda a buscar</small>
                         </div>
                   </div>
                 
@@ -103,7 +108,7 @@
               
                 <div class="row justify-content-center align-items-center" id="categoria-div" style="display:none;">
                     <div class="col"  style="margin-left:40%; width:20%; margin-bottom:1%;">
-                        <label for="categoria-selector">Seleccionar categoria: </label>
+                        <label for="categoria-selector"  style="color:white;">Seleccionar categoria: </label>
                         <select class="custom-select row" name="categoria" id="categoria" >
                         
                           <option value="chompa" selected>Chompa</option>
@@ -132,8 +137,8 @@
     <!--TABLA DE CONTENIDOS-->
 
     <div class="container-fluid" style="margin-top:1%;">
-    <div class="table-responsive-md">
-    <table class="table">
+    <div class="table-responsive-md" >
+    <table class="table  my-table">
    <thead class="table-primary">
     <tr>
       <th scope="col">Codigo Producto</th>
@@ -142,6 +147,7 @@
       <th scope="col">Talla</th>
       <th scope="col">Color</th>
       <th scope="col">Precio Unitario</th>
+      <th scope="col">Precio Mayor</th>
       <th scope="col">Unidades</th>
       <th scope="col">Imagen</th>
       <th scope="col">View</th>
@@ -156,38 +162,65 @@
                   $nombre_producto = $_POST['nombre'];
                   $categoria_producto=$_POST['categoria'];
                   //conuslta SQL
-                  $sql = "SELECT P.idProducto as ID, P.nombre as nombre, CL.nombre as color,T.nombre as talla,CT.nombre as categoria,P.precioUnitario as precioUnit,P.unidadesDisp as unidades,P.imagen as imagen
-                  FROM Producto as P 
-                  LEFT JOIN Categoria as CT ON P.idCategoria=CT.idCategoria 
-                  LEFT JOIN Talla as T ON P.idTalla=T.idTalla 
-                  LEFT JOIN Color as CL ON P.idColor=CL.idColor
-                  WHERE P.nombre LIKE  '%$nombre_producto%' AND CT.nombre LIKE '%$categoria_producto%'";
+                  $sql = "SELECT P.idProducto as ID,
+                  ST.nombre as nombre, 
+                      CL.nombre as color,
+                      T.nombre as talla,
+                      CT.nombre as categoria,
+                      P.precioUni as precioUnit,
+                      P.precioMay as precioMayor,
+                      P.unidadesDisp as unidades,
+                      I.imagen as imagen
+                                FROM Producto as P 
+                                LEFT JOIN Subcategoria as ST ON P.idSubcategoria=ST.idSubcategoria
+                                LEFT JOIN Categoria as CT ON ST.idCategoria=CT.idCategoria
+                                LEFT JOIN Talla as T ON P.idTalla=T.idTalla 
+                                LEFT JOIN Color as CL ON P.idColor=CL.idColor
+                                LEFT JOIN Imagen as I ON I.idProducto=P.idProducto AND I.tipoVista='a'
+                                WHERE CT.nombre LIKE '%$categoria_producto%';";
+                                  
+                                  //ST.nombre LIKE  '%$nombre_producto%' OR
             //die($sql);
             }else{//Si no se ha hecho una consulta, se filtran todas las columnas por defectos
-              $sql = "SELECT P.idProducto as ID, P.nombre as nombre, CL.nombre as color,T.nombre as talla,CT.nombre as categoria,P.precioUnitario as precioUnit,P.unidadesDisp as unidades,P.imagen as imagen
-              FROM Producto as P 
-              LEFT JOIN Categoria as CT ON P.idCategoria=CT.idCategoria 
-              LEFT JOIN Talla as T ON P.idTalla=T.idTalla 
-              LEFT JOIN Color as CL ON P.idColor=CL.idColor";
+              $sql = "SELECT  P.idProducto as ID,
+              ST.nombre as nombre, 
+                  CL.nombre as color,
+                  T.nombre as talla,
+                  CT.nombre as categoria,
+                  P.precioUni as precioUnit,
+                  P.precioMay as precioMayor,
+                  P.unidadesDisp as unidades,
+                  I.imagen as imagen
+                            FROM Producto as P 
+                            LEFT JOIN Subcategoria as ST ON P.idSubcategoria=ST.idSubcategoria
+                            LEFT JOIN Categoria as CT ON ST.idCategoria=CT.idCategoria
+                            LEFT JOIN Talla as T ON P.idTalla=T.idTalla 
+                            LEFT JOIN Color as CL ON P.idColor=CL.idColor
+                            LEFT JOIN Imagen as I ON I.idProducto=P.idProducto AND I.tipoVista='a' LIMIT 25;";
 
             }
             $result = mysqli_query($conexion, $sql);
             //cuantos reultados hay en la busqueda
             $num_resultados = mysqli_num_rows($result);
-            echo "<p>Número de prendas encontradas: ".$num_resultados."</p>";
+            echo "<p  style='color:white;'>Número de prendas encontradas: ".$num_resultados."</p>";
             //mostrando informacion de los perros y detalle
             for ($i=0; $i <$num_resultados; $i++) {
             $row = mysqli_fetch_array($result); 
         ?>
             <tr>  
-            <td><?php echo $row['ID']; ?></td>
-            <td><?php echo $row['nombre']; ?></td>
-            <td><?php echo $row['categoria']; ?></td>
-            <td><?php echo $row['talla']; ?></td>
-            <td><?php echo $row['color']; ?></td>
-            <td><?php echo 'S./'.round($row['precioUnit'],2); ?></td>
-            <td><?php echo $row['unidades']; ?></td>
-            <td><img class="rounded" src=<?php echo "data:image/jpeg;base64,'".base64_encode($row['imagen'])."'";?> width="100" height="100"></td>
+            <td><b><?php echo $row['ID']; ?></b></td>
+            <td><b><?php echo $row['nombre']; ?></b></td>
+            <td><b><?php echo $row['categoria']; ?></b></td>
+              
+            <td> <b><?php echo $row['talla']; ?></b></td>
+            <td><b><?php echo $row['color']; ?></b></td>
+            <td><b><?php echo 'S./'.round($row['precioUnit'],2); ?></b></td>
+            <td><b><?php echo 'S./'.round($row['precioMayor'],2); ?></b></td>
+            <td><b><?php echo $row['unidades']; ?></b></td>
+            <td>
+            <?php  echo '<img class="rounded" src=data:image/jpeg;base64,'.str_replace("'", '',base64_encode( $row['imagen'] )).' style="height:100px;width:100px";/>'; ?>
+                      
+            </td>
             <td>
               <div class="container">
                   <button type="button" class="btn btn-warning" data-toggle="modal" data-target=<?php echo "#myModal".$row['ID']; ?> style="color:black;">
@@ -204,7 +237,10 @@
                           <!-- Modal body -->
                           <div class="modal-body">
                             <div class="container justify-content-center text-center">
-                                  <img class="rounded" src=<?php echo "data:image/jpeg;base64,'".base64_encode($row['imagen'])."'";?> width="200" height="200">
+                            <?php 
+                            
+                            echo '<img class="rounded" src=data:image/jpeg;base64,'.str_replace("'", '',base64_encode( $row['imagen'] )).' style="height:200px;width:200px";/>'; ?>
+                                  
                             </div>
                             <h3>Unidades disponibles</h3>
                             <h5>Unidades <span class="badge badge-warning"><?php echo $row['unidades'].' unidades';?></span></h5>
@@ -214,6 +250,7 @@
                             <h5>Actual <span class="badge badge-success"><?php echo $row['categoria']; ?></span></h5>
                           
                             <h3><span class="badge badge-dark">Precio por unidad S/<?php echo '  '.round($row['precioUnit'],2);?></span></h3>
+                            <h3><span class="badge badge-dark">Precio por Mayor S/<?php echo '  '.round($row['precioMayor'],2);?></span></h3>
                           </div>
                           <!-- Modal footer -->
                           <div class="modal-footer">

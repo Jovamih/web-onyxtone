@@ -1,27 +1,19 @@
 <?php
-    if(isset($_POST['user']) && isset($_POST['password'])){
-      session_start();
-        $user = $_POST['user'];
-        $password = $_POST['password'];
-        $query = "SELECT * FROM Usuario WHERE user = '$user' AND password = '$password'";
-        //die($query);
-        include_once("../database/conexion.php");
-        $result = mysqli_query($conexion, $query);
-        if(mysqli_num_rows($result) > 0){
-            $row = mysqli_fetch_array($result);
-            $_SESSION['user'] = $row['user'];
-            //cerrar la conexion a la base de datos a la vez que se cierra el script
-            mysqli_close($conexion);
-            header("Location:../inicio_admin/");
-        }else{
-          echo '
-          <script>
-              alert("Es necesario que inicie sesión");
-              window.location = "./";
-          </script>
-        ';
-        die();
-        }
+    session_start();
+    //include_once("../database/conexion.php");
+    if(!isset($_SESSION['user'])){
+      //die("Error de conexion. Talvez se deba a su conexion a internet o al acceder a un sitio con privilegios insuficientes");
+      header("Location:../login_admin/");
+    }else{
+      //en caso de que si este definida obtenemos algun valor
+    }
+?>
+
+<?php
+    //conexion a la Base de datos (Servidor,usuario,password)
+    $conn = mysqli_connect("boutiquedkar.cuxsffuy95k9.us-east-1.rds.amazonaws.com","admin", "admin12345678", "boutique");
+    if (!$conn) {
+        die("Error de conexion: " . mysqli_connect_error());
     }
 ?>
 
@@ -29,7 +21,7 @@
 <html>
 
 <head>
-    <title>BOUTIQUE D'KAR</title>
+    <title>BOUTIQUE ONYX STONE</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="../resources/faviconv2.png"/>
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
@@ -42,7 +34,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <script>
+          $(document).ready(function(){
+            $("#nombre").on("keyup", function() {
+              var value = $(this).val().toLowerCase();
+              $("#myQuery tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+            });
+          });
+      
+    </script>
 </head>
 
 <body>
@@ -51,16 +53,19 @@
             <input type="checkbox" id="menuprincipal">
             <label class="fas fa-bars" for="menuprincipal"></label>
             <nav class="menu">
-                <a href="../inicio_admin/"><i class="fal fa-home-lg" ></i>INICIO</a></li>
-                <a href="../registrar_admin/RegistrarIngreso.php">AGREGAR PRENDAS</a></li>
-                <a href="SalidaProducto.php">SALIDA DE PRENDAS</a></li>
+                <a href="../inicio_admin/"><i class="fal fa-home-lg" ></i>INICIO</a>
+                <a href="../registrar_admin/RegistrarIngreso.php">
+                    <i class="fas fa-plus"></i>AGREGAR PRENDAS
+                </a>
+                <a href="SalidaProducto.php">
+                    <i class="fas fa-minus"></i>SALIDA DE PRENDAS
+                </a>
                 <a href="../consultar_admin/">
-                <i class="fal fa-eye"></i> 
-                
-                VER PRENDAS</a></li>                
+                    <i class="fal fa-eye"></i> VER PRENDAS
+                </a>                
                 <a href="../cerrar_sesion/cerrar_sesion.php">CERRAR SESIÓN
-                <i class="fal fa-sign-out"></i>
-            </a></li>
+                    <i class="fal fa-sign-out"></i>
+                </a>
             </nav>
         </div>
     </header>
@@ -68,7 +73,7 @@
     <main class="justify-content-center formato-fuente-boostrap">
     <section class="salidaProductos">
             <div class="logo"> 
-                <h3><a href="https://onyxstoneportal.herokuapp.com/ " target="_blank">BOUTIQUE D'KAR</a></h3>
+                <h3><a href="https://onyxstoneportal.herokuapp.com/" target="_blank">BOUTIQUE ONYX STONE</a></h3>
                 <p>Lo mejor de moda para <span>ellos!</span></p>
             </div>
             <div>
@@ -81,13 +86,13 @@
                 <input name="Codigo" type="text" placeholder="Código de producto">
                 <!--CANTIDAD INPUT-->
                 <label for="cantidad">Cantidad a retirar</label>
-                <input name="Cantidad" type="number" placeholder="Cantidad de salida">
+                <input name="Cantidad" type="number" placeholder="Cantidad de salida" min="1">
                 <!--ENVIAR
-                <div class="boton">
+                <div class="boton">  data-toggle="modal" data-target="#ConfirmacionIngreso"
                     <Input name="Registrar" type="submit" value="REGISTRAR SALIDA">
                 </div>-->
-                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ConfirmacionIngreso">
-                    QUITAR PRODUCTOS
+                <button class="btn btn-primary btn-lg">
+                    <i class="fad fa-file-minus"></i>QUITAR PRODUCTOS
                 </button>
             </form>
 
@@ -119,15 +124,16 @@
                 <h2 style="text-align: center;">Buscar código</h2>
             </div>
 
-            <div class=" d-flex flex-column justify-content-center text-center" >
-                <div class="ui-widget">
+            <div class="row justify-content-center align-items-center" id="input-nombre" style="display:block;">                 
+                  <div class=" d-flex flex-column justify-content-center text-center" >
+                        <div class="ui-widget">
                             <label for="nombre"></label>
                             <input  class="form-control row" name="nombre" id="nombre" value="" style="margin-left:40%; width:20%;">
-                            <small id="helpId" class="text-muted">Ingrese el nombre de la prenda</small>
-                </div>
-            </div>
-            
-
+                            <small id="helpId" class="text">Ingrese el nombre de la prenda a buscar</small>
+                        </div>
+                  </div>                
+            </div>  
+        
             <!--TABLA DE CONTENIDOS-->
             <section class="buscando">
                 <div class="container-fluid" style="margin-top:1%;">
@@ -143,37 +149,50 @@
                             </tr>
                         </thead>
                         <tbody id="myQuery">
+
+                            <?php
+                                $sql = "select * from Producto ORDER BY idSubcategoria";
+                                $result = mysqli_query($conn, $sql);
+                                $num_resultados = mysqli_num_rows($result);
+                                    for ($i=0; $i <$num_resultados; $i++){
+                                        $row = mysqli_fetch_array($result);
+                            ?>
                             <tr>
-                                <td scope="col">103XXL150</td>
-                                <td scope="col">Polo cuello camisero ML</td>
-                                <td scope="col">Extra Extra Large</td>                            
-                                <td scope="col">Amarillo</td>                            
-                                <td scope="col">200 unidades</td>
+                                <!--CODIGO-->
+                                <td><?php  echo $row['idSubcategoria'];echo $row['idTalla'];echo $row['idColor']?></td>
+                                <!--NOMBRE-->
+                                <td><?php  
+                                        $subcat = $row['idSubcategoria'];
+                                        $consultaSC="SELECT nombre FROM Subcategoria where idSubcategoria=$subcat";
+	                                    $resultadoSC=mysqli_query($conn,$consultaSC);
+	                                    $arraySC=mysqli_fetch_array($resultadoSC);
+	                                    $nombre = $arraySC[0];	
+                                        echo $nombre;
+                                    ?></td>
+                                <!--TALLA-->
+                                <td><?php  echo $row['idTalla']?></td>
+                                <!--COLOR-->                                
+                                <td><?php  
+                                        $col = $row['idColor'];
+                                        $consultaC="SELECT nombre FROM Color where idColor=$col";
+	                                    $resultadoC=mysqli_query($conn,$consultaC);
+	                                    $arrayC=mysqli_fetch_array($resultadoC);
+	                                    $color = $arrayC[0];	
+                                        echo $color;
+                                    ?></td>
+                                <!--UNIDADES-->
+                                <td><?php  echo $row['unidadesDisp']?></td>
                             </tr>
-                            <tr>
-                                <td scope="col">201M130</td>
-                                <td scope="col">Polera con capucha</td>
-                                <td scope="col">Medium</td>                            
-                                <td scope="col">Azul</td>                            
-                                <td scope="col">120 unidades</td>
-                            </tr>
+                            <?php 
+                                }
+                            ?>
+                            <?php echo "Total de productos registrados : ".$num_resultados  ?>
                         </tbody>
                     </table>
                     </div>
                 </div>
             </section>
-            
-
-        </section>
-
-        
-
-
-
-
-
-
-
+    </section>
     </main>
 
     <footer>

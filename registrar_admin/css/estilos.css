@@ -130,6 +130,23 @@ input, select{
 	text-align: center;
 }
 
+#linea-tipo p {
+	display: inline;
+	font-size: 25px;		
+}
+
+#linea-tipo span {
+	display: inline;
+	font-size: 18px;		
+}
+
+#linea-tipo {
+	margin: 10px;
+}
+
+
+
+
 /****************responsive**********/
 @media	(min-width: 1024px){
 	.contenedor .menu{
