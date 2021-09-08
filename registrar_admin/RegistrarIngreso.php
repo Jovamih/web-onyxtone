@@ -1,27 +1,19 @@
 <?php
-    if(isset($_POST['user']) && isset($_POST['password'])){
-      session_start();
-        $user = $_POST['user'];
-        $password = $_POST['password'];
-        $query = "SELECT * FROM Usuario WHERE user = '$user' AND password = '$password'";
-        //die($query);
-        include_once("../database/conexion.php");
-        $result = mysqli_query($conexion, $query);
-        if(mysqli_num_rows($result) > 0){
-            $row = mysqli_fetch_array($result);
-            $_SESSION['user'] = $row['user'];
-            //cerrar la conexion a la base de datos a la vez que se cierra el script
-            mysqli_close($conexion);
-            header("Location:../inicio_admin/");
-        }else{
-          echo '
-          <script>
-              alert("Es necesario que inicie sesión");
-              window.location = "./";
-          </script>
-        ';
-        die();
-        }
+    session_start();
+    //include_once("../database/conexion.php");
+    if(!isset($_SESSION['user'])){
+      //die("Error de conexion. Talvez se deba a su conexion a internet o al acceder a un sitio con privilegios insuficientes");
+      header("Location:../login_admin/");
+    }else{
+      //en caso de que si este definida obtenemos algun valor
+    }
+?>
+
+<?php
+    //conexion a la Base de datos (Servidor,usuario,password)
+    $conn = mysqli_connect("boutiquedkar.cuxsffuy95k9.us-east-1.rds.amazonaws.com","admin", "admin12345678", "boutique");
+    if (!$conn) {
+        die("Error de conexion: " . mysqli_connect_error());
     }
 ?>
 
