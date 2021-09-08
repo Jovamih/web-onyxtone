@@ -62,7 +62,7 @@
 			<p>Lo mejor de moda para <span>ellos!</span></p>
 </div>
 
-    <div class="container logo">
+    <div class="container justify-content-center d-flex">
         
         <div class="card-body p-0">
               <div class="row">
